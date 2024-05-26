@@ -95,4 +95,5 @@ tar -xvf Fortran_C_NETCDF_MPI_tests.tar
 
 
 cd $angel
+unset angel
 rm $(basename "$0")
