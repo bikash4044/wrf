@@ -5,7 +5,7 @@ sudo apt-get install gcc cpp csh perl git gfortran
 cd wrf
 mkdir Build_WRF
 cd Build_WRF
-mkdir test
+
 mkdir LIBRARIES
 cd LIBRARIES
 
@@ -87,7 +87,9 @@ make
 make install
 cd ..
 
-cd ../test
+cd ..
+mkdir test
+cd test
 wget https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_NETCDF_MPI_tests.tar
 tar -xvf Fortran_C_NETCDF_MPI_tests.tar
 
