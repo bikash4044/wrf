@@ -13,19 +13,19 @@ cd LIBRARIES
 pushd $(dirname $(which ncl))
 cd ..
 echo "export NCARG_ROOT=$(pwd)" >> ~/.bashrc
-echo "export PATH=$NCARG_ROOT/bin:$PATH" >> ~/.bashrc
+echo 'export PATH=$NCARG_ROOT/bin:$PATH' >> ~/.bashrc
 
 echo "export DIR=$(pwd)" >> ~/.bashrc
-echo "export CC=gcc" >> ~/.bashrc
-echo "export CXX=g++" >> ~/.bashrc
-echo "export FC=gfortran" >> ~/.bashrc
-echo "export FCFLAGS=-m64" >> ~/.bashrc
-echo "export F77=gfortran" >> ~/.bashrc
-echo "export FFLAGS=-m64" >> ~/.bashrc
-echo "export JASPERLIB=$DIR/grib2/lib" >> ~/.bashrc
-echo "export JASPERINC=$DIR/grib2/include" >> ~/.bashrc
-echo "export LDFLAGS=-L$DIR/grib2/lib" >> ~/.bashrc
-echo "export CPPFLAGS=-I$DIR/grib2/include" >> ~/.bashrc
+echo 'export CC=gcc' >> ~/.bashrc
+echo 'export CXX=g++' >> ~/.bashrc
+echo 'export FC=gfortran' >> ~/.bashrc
+echo 'export FCFLAGS=-m64' >> ~/.bashrc
+echo 'export F77=gfortran' >> ~/.bashrc
+echo 'export FFLAGS=-m64' >> ~/.bashrc
+echo 'export JASPERLIB=$DIR/grib2/lib' >> ~/.bashrc
+echo 'export JASPERINC=$DIR/grib2/include' >> ~/.bashrc
+echo 'export LDFLAGS=-L$DIR/grib2/lib' >> ~/.bashrc
+echo 'export CPPFLAGS=-I$DIR/grib2/include' >> ~/.bashrc
 source ~/.bashrc
 
 popd
@@ -37,10 +37,10 @@ make
 make install
 cd ..
 
-echo "export PATH=$DIR/netcdf/bin:$PATH" >> ~/.bashrc
-echo "export NETCDF=$DIR/netcdf" >> ~/.bashrc
-echo "export CPPFLAGS=-I$DIR/netcdf/include" >> ~/.bashrc
-echo "export LDFLAGS=-$DIR/netcdf/lib" >> ~/.bashrc
+echo 'export PATH=$DIR/netcdf/bin:$PATH' >> ~/.bashrc
+echo 'export NETCDF=$DIR/netcdf' >> ~/.bashrc
+echo 'export CPPFLAGS=-I$DIR/netcdf/include' >> ~/.bashrc
+echo 'export LDFLAGS=-$DIR/netcdf/lib' >> ~/.bashrc
 
 source ~/.bashrc
 wget https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/netcdf-fortran-4.5.2.tar.gz
