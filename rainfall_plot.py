@@ -12,7 +12,12 @@ import geopandas as gpd
 from shapely.geometry import Point
 from cartopy.mpl.gridliner import LatitudeFormatter, LongitudeFormatter
 import numpy.ma as ma
-
+control='../../control.csv'
+df = pd.read_csv(control)
+min1=df['min1'][0]
+max1=df['max1'][0]
+min2=df['min2'][0]
+max2=df['max2'][0]
 shapefile_path = r"../west_central.shp"
 # shapefile_path = r"../west_central.shp"
 gdf = gpd.read_file(shapefile_path)
@@ -53,6 +58,9 @@ raint1 = (ds2.variables["RAINC"][0] + ds2.variables["RAINNC"][0]) - (ds1.variabl
         
 subset_data = raint1[mask]
 
+min1=min(min1,subset_data.min())
+max1=max(max1,subset_data.max())
+
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 pcm = ax.pcolormesh(lon, lat,raint1, cmap="jet", transform=ccrs.PlateCarree())
 xticks=[70, 76, 82]
@@ -81,6 +89,9 @@ raint2 = (ds2.variables["RAINC"][0] + ds2.variables["RAINNC"][0]) - (ds1.variabl
         
 subset_data = raint2[mask]
 
+min1=min(min1,subset_data.min())
+max1=max(max1,subset_data.max())
+
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 pcm = ax.pcolormesh(lon, lat,raint2, cmap="jet", transform=ccrs.PlateCarree())
 xticks=[70, 76, 82]
@@ -108,6 +119,9 @@ raint3 = (ds2.variables["RAINC"][0] + ds2.variables["RAINNC"][0]) - (ds1.variabl
         
 subset_data = raint3[mask]
 
+min1=min(min1,subset_data.min())
+max1=max(max1,subset_data.max())
+
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 pcm = ax.pcolormesh(lon, lat,raint3, cmap="jet", transform=ccrs.PlateCarree())
 xticks=[70, 76, 82]
@@ -134,6 +148,8 @@ ds2 = nc(files[-1])
 raint4 = (ds2.variables["RAINC"][0] + ds2.variables["RAINNC"][0]) - (ds1.variables["RAINC"][0] + ds1.variables["RAINNC"][0])
         
 subset_data = raint4[mask]
+min1=min(min1,subset_data.min())
+max1=max(max1,subset_data.max())
 
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 pcm = ax.pcolormesh(lon, lat,raint4, cmap="jet", transform=ccrs.PlateCarree())
@@ -158,8 +174,11 @@ plt.savefig(f'plots/rainfall{year}sep.png')
 ds1 = nc(files[0])
 ds2 = nc(files[-1])  
 raint = raint1+raint2+raint3+raint4
-        
+
 subset_data = raint[mask]
+
+min2=min(min2,subset_data.min())
+max2=max(max2,subset_data.max())
 
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 pcm = ax.pcolormesh(lon, lat,raint, cmap="jet", transform=ccrs.PlateCarree())
@@ -179,5 +198,12 @@ ax.xaxis.set_major_formatter(LongitudeFormatter())
 ax.yaxis.set_major_formatter(LatitudeFormatter())
 plt.title(f"Rainfall on {year}", fontsize="20")
 plt.savefig(f'plots/rainfall{year}tot.png')
+
+df['min1']=min1
+df['max1']=max1
+df['min2']=min2
+df['max2']=max2
+
+df.to_csv(control)
 
 
